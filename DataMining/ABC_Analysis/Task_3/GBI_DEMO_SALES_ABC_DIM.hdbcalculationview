@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="GBI_DEMO_SALES_ABC_DIM" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="GBI_DEMO_SALES_ABC_DIM"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="GBI_DEMO_Customer">
+    <resourceUri>GBI_DEMO_Customer</resourceUri>
+  </DataSource>
+  <DataSource id="Salesorg">
+    <resourceUri>Salesorg</resourceUri>
+  </DataSource>
+  <DataSource id="GBI_DEMO_Country">
+    <resourceUri>GBI_DEMO_Country</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="C1_1" joinType="textTable" languageColumn="LANGUAGE" multiJoinNode="Join_1" multiJoinCentralTable="GBI_DEMO_Customer" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="CUSTOMER_NUMBER"/>
+      <viewAttribute id="CUSTOMER_NAME"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="VALID_TO"/>
+      <viewAttribute id="VALID_FROM"/>
+      <viewAttribute id="SALES_ORGANIZATION"/>
+      <viewAttribute id="COUNTRY"/>
+      <viewAttribute id="SHORT_TEXT_SALESORG"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="GBI_DEMO_Customer">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOMER_NUMBER" source="CUSTOMER_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOMER_NAME" source="CUSTOMER_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALID_TO" source="VALID_TO"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALID_FROM" source="VALID_FROM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALES_ORGANIZATION" source="SALES_ORGANIZATION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+    </input>
+    <input node="Salesorg">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SHORT_TEXT_SALESORG" source="SHORT_TEXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALES_ORGANIZATION" source="SALES_ORGANIZATION"/>
+    </input>
+    <joinAttribute name="SALES_ORGANIZATION"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_2" cardinality="C1_1" joinType="textTable" languageColumn="LANGUAGE" multiJoinNode="Join_1" multiJoinCentralTable="GBI_DEMO_Customer" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="CUSTOMER_NUMBER"/>
+      <viewAttribute id="CUSTOMER_NAME"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="VALID_TO"/>
+      <viewAttribute id="VALID_FROM"/>
+      <viewAttribute id="SALES_ORGANIZATION"/>
+      <viewAttribute id="COUNTRY"/>
+      <viewAttribute id="SHORT_TEXT_COUNTRY"/>
+      <viewAttribute id="SHORT_TEXT_SALESORG"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Join_1_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOMER_NUMBER" source="CUSTOMER_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOMER_NAME" source="CUSTOMER_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALID_TO" source="VALID_TO"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALID_FROM" source="VALID_FROM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALES_ORGANIZATION" source="SALES_ORGANIZATION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SHORT_TEXT_SALESORG" source="SHORT_TEXT_SALESORG"/>
+    </input>
+    <input node="GBI_DEMO_Country">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SHORT_TEXT_COUNTRY" source="SHORT_TEXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+    </input>
+    <joinAttribute name="COUNTRY"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1_2">
+  <attributes>
+    <attribute id="CUSTOMER_NUMBER" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUSTOMER_NUMBER"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="CUSTOMER_NUMBER"/>
+    </attribute>
+    <attribute id="CUSTOMER_NAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUSTOMER_NAME"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="CUSTOMER_NAME"/>
+    </attribute>
+    <attribute id="CITY" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CITY"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="CITY"/>
+    </attribute>
+    <attribute id="VALID_TO" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="VALID_TO"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="VALID_TO"/>
+    </attribute>
+    <attribute id="VALID_FROM" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="VALID_FROM"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="VALID_FROM"/>
+    </attribute>
+    <attribute id="SALES_ORGANIZATION" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SALES_ORGANIZATION"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="SALES_ORGANIZATION"/>
+    </attribute>
+    <attribute id="COUNTRY" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COUNTRY"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="COUNTRY"/>
+    </attribute>
+    <attribute id="SHORT_TEXT_COUNTRY" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SHORT_TEXT"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="SHORT_TEXT_COUNTRY"/>
+    </attribute>
+    <attribute id="SHORT_TEXT_SALESORG" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SHORT_TEXT"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="SHORT_TEXT_SALESORG"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="100" y="105"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="225"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="GBI_DEMO_Customer" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="GBI_DEMO_Country" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Salesorg" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="620" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

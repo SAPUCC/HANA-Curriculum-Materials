@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="GBI_DEMO_SALES_CUBE_CV" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="GBI_DEMO_SALES_CUBE_CV"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="GBI_DEMO_Sales">
+    <resourceUri>GBI_DEMO_Sales</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="YEAR"/>
+      <viewAttribute id="MONTH"/>
+      <viewAttribute id="DAY"/>
+      <viewAttribute id="CUSTOMER_NUMBER"/>
+      <viewAttribute id="ORDER_NUMBER"/>
+      <viewAttribute id="ORDER_ITEM"/>
+      <viewAttribute id="PRODUCT"/>
+      <viewAttribute id="SALES_QUANTITY"/>
+      <viewAttribute id="UNIT_OF_MEASURE"/>
+      <viewAttribute id="REVENUE"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="DISCOUNT"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="NET_REVENUE" datatype="DECIMAL" length="17" scale="2" expressionLanguage="SQL">
+        <formula>&quot;REVENUE&quot;-&quot;DISCOUNT&quot;</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+    <input node="GBI_DEMO_Sales">
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DAY" source="DAY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOMER_NUMBER" source="CUSTOMER_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ORDER_NUMBER" source="ORDER_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ORDER_ITEM" source="ORDER_ITEM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT" source="PRODUCT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALES_QUANTITY" source="SALES_QUANTITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="UNIT_OF_MEASURE" source="UNIT_OF_MEASURE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REVENUE" source="REVENUE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DISCOUNT" source="DISCOUNT"/>
+    </input>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Projection_1" ignoreMultipleOutputsForFilter="false">
+  <attributes>
+    <attribute id="YEAR" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="YEAR"/>
+      <keyMapping columnObjectName="Projection_1" columnName="YEAR"/>
+    </attribute>
+    <attribute id="MONTH" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MONTH"/>
+      <keyMapping columnObjectName="Projection_1" columnName="MONTH"/>
+    </attribute>
+    <attribute id="ORDER_ITEM" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ORDER_ITEM"/>
+      <keyMapping columnObjectName="Projection_1" columnName="ORDER_ITEM"/>
+    </attribute>
+    <attribute id="UNIT_OF_MEASURE" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="UNIT_OF_MEASURE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="UNIT_OF_MEASURE"/>
+    </attribute>
+    <attribute id="CURRENCY" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CURRENCY"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CURRENCY"/>
+    </attribute>
+    <attribute id="CUSTOMER_NUMBER$local">
+      <descriptions defaultDescription="CUSTOMER_NUMBER"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUSTOMER_NUMBER"/>
+    </attribute>
+    <attribute id="PRODUCT$local">
+      <descriptions defaultDescription="PRODUCT"/>
+      <keyMapping columnObjectName="Projection_1" columnName="PRODUCT"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="SALES_QUANTITY" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="SALES_QUANTITY"/>
+      <measureMapping columnObjectName="Projection_1" columnName="SALES_QUANTITY"/>
+    </measure>
+    <measure id="REVENUE" order="6" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="REVENUE"/>
+      <measureMapping columnObjectName="Projection_1" columnName="REVENUE"/>
+    </measure>
+    <measure id="NET_REVENUE" order="8" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="NET_REVENUE"/>
+      <measureMapping columnObjectName="Projection_1" columnName="NET_REVENUE"/>
+    </measure>
+    <measure id="DISCOUNT" order="9" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="DISCOUNT"/>
+      <measureMapping columnObjectName="Projection_1" columnName="DISCOUNT"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+  <sharedDimensions>
+    <logicalJoin associatedObjectUri="GBI_DEMO_CUST_DIM_CV">
+      <attributes>
+        <attributeRef>CUSTOMER_NUMBER$local</attributeRef>
+      </attributes>
+      <associatedAttributeNames>
+        <attributeName>CUSTOMER_NUMBER</attributeName>
+      </associatedAttributeNames>
+      <properties joinType="referential" referentialDirection="left" joinOperator="Equal"/>
+      <associatedAttributeFeatures/>
+    </logicalJoin>
+    <logicalJoin associatedObjectUri="GBI_DEMO_PROD_DIM_CV">
+      <attributes>
+        <attributeRef>PRODUCT$local</attributeRef>
+      </attributes>
+      <associatedAttributeNames>
+        <attributeName>PRODUCT</attributeName>
+      </associatedAttributeNames>
+      <properties joinType="referential" referentialDirection="left" joinOperator="Equal"/>
+      <associatedAttributeFeatures/>
+    </logicalJoin>
+  </sharedDimensions>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="90" y="275"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="202.53125"/>
+    </shape>
+    <shape modelObjectName="GBI_DEMO_CUST_DIM_CV" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+      <upperLeftCorner x="316" y="33"/>
+      <rectangleSize width="225.17041015625"/>
+    </shape>
+    <shape modelObjectName="GBI_DEMO_PROD_DIM_CV" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+      <upperLeftCorner x="596" y="33"/>
+      <rectangleSize width="221.365234375"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

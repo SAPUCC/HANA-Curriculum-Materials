@@ -1,0 +1,11 @@
+namespace NativeDevelopment.db.cds;
+
+context GBItypes {
+	
+	type StandardTypes {
+		Sstring3 : String(3);
+		Sstring10 : String(10);
+		Sdec172 : Decimal(17, 2);
+	};
+	
+};

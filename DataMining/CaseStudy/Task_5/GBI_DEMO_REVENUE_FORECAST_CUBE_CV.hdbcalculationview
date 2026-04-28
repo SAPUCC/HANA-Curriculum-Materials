@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="GBI_DEMO_REVENUE_FORECAST_CUBE_CV" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="GBI_DEMO_REVENUE_FORECAST_CUBE_CV"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="GBI_DEMO_SALES_CUBE_CV">
+    <resourceUri>GBI_DEMO_SALES_CUBE_CV</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="YEAR"/>
+      <viewAttribute id="MONTH"/>
+      <viewAttribute id="CUSTOMER_NUMBER"/>
+      <viewAttribute id="REVENUE"/>
+      <viewAttribute id="CURRENCY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="GBI_DEMO_SALES_CUBE_CV"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Projection_1">
+  <attributes>
+    <attribute id="YEAR" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="YEAR"/>
+      <keyMapping columnObjectName="Projection_1" columnName="YEAR"/>
+    </attribute>
+    <attribute id="MONTH" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MONTH"/>
+      <keyMapping columnObjectName="Projection_1" columnName="MONTH"/>
+    </attribute>
+    <attribute id="CUSTOMER_NUMBER" order="3" displayAttribute="false" attributeHierarchyActive="false" hidden="true">
+      <descriptions defaultDescription="CUSTOMER_NUMBER"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUSTOMER_NUMBER"/>
+    </attribute>
+    <attribute id="CURRENCY" hidden="true" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CURRENCY"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CURRENCY"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="REVENUE" order="4" aggregationType="sum" measureType="simple" hidden="true">
+      <descriptions defaultDescription="REVENUE"/>
+      <measureMapping columnObjectName="Projection_1" columnName="REVENUE"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures>
+    <measure id="REVENUE_EUR" order="6" aggregationType="sum" measureType="simple" datatype="DOUBLE" expressionLanguage="COLUMN_ENGINE">
+      <formula>ROUND(double(if(&quot;CURRENCY&quot;='USD', &quot;REVENUE&quot;*0.73, &quot;REVENUE&quot;)),2)</formula>
+      
+      </measure>
+  </calculatedMeasures>
+  <restrictedMeasures/>
+  <localDimensions/>
+  <sharedDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="211"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="202.53125"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

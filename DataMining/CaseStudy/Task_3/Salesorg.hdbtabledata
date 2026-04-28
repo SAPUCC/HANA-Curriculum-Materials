@@ -1,0 +1,27 @@
+{	
+"format_version": 1,
+	"imports": [
+		{
+			"target_table": "Salesorg",
+			"source_data": {
+				"data_type": "CSV",
+				"file_name": "Salesorg.csv",
+				"has_header": false,
+				"no_data_import": false,
+				"delete_existing_foreign_data": false,
+				"type_config": {
+					"delimiter": ","
+				}},
+			"import_settings": {
+				"import_columns": [
+					"SALES_ORGANIZATION",
+					"LANGUAGE",
+					"SHORT_TEXT"
+				]},
+			"column_mappings": {
+				"SALES_ORGANIZATION": 1,
+				"LANGUAGE": 2,
+				"SHORT_TEXT": 3
+			}}
+	]
+}

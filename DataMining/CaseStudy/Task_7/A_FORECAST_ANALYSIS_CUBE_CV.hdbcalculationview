@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="A_FORECAST_ANALYSIS_CUBE_CV" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="A_FORECAST_ANALYSIS_CUBE_CV"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="GBI_DEMO_REVENUE_FORECAST_CUBE_CV">
+    <resourceUri>GBI_DEMO_REVENUE_FORECAST_CUBE_CV</resourceUri>
+  </DataSource>
+  <DataSource id="ATRIPLEMODEL">
+    <resourceUri>ATRIPLEMODEL</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="YEAR"/>
+      <viewAttribute id="MONTH"/>
+      <viewAttribute id="REVENUE_EUR"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="ID" datatype="INTEGER" expressionLanguage="SQL">
+        <formula>12*(&quot;YEAR&quot;-2007)+&quot;MONTH&quot;</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+    <input node="GBI_DEMO_REVENUE_FORECAST_CUBE_CV"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="VALUE"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="YEAR" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <formula>2007 + ( (&quot;ID&quot;-if((&quot;ID&quot;%12)!=0, (&quot;ID&quot;%12), 12)) /12 )</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="MONTH" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <formula>if((&quot;ID&quot;%12)!=0, (&quot;ID&quot;%12), 12)</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+    <input node="ATRIPLEMODEL"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:UnionView" id="Union_1">
+    <viewAttributes>
+      <viewAttribute id="YEAR" aggregationType="sum"/>
+      <viewAttribute id="ID" aggregationType="sum"/>
+      <viewAttribute id="MONTH" aggregationType="sum"/>
+      <viewAttribute id="REVENUE_EUR" aggregationType="sum"/>
+      <viewAttribute id="VALUE" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Projection_1" emptyUnionBehavior="NO_ROW">
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="VALUE" null="true" value=""/>
+    </input>
+    <input node="Projection_2" emptyUnionBehavior="NO_ROW">
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="REVENUE_EUR" null="true" value=""/></input>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Union_1">
+  <attributes>
+    <attribute id="YEAR" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="YEAR"/>
+      <keyMapping columnObjectName="Union_1" columnName="YEAR"/>
+    </attribute>
+    <attribute id="ID" order="2" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ID"/>
+      <keyMapping columnObjectName="Union_1" columnName="ID"/>
+    </attribute>
+    <attribute id="MONTH" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MONTH"/>
+      <keyMapping columnObjectName="Union_1" columnName="MONTH"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="REVENUE_EUR" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="REVENUE_EUR"/>
+      <measureMapping columnObjectName="Union_1" columnName="REVENUE_EUR"/>
+    </measure>
+    <measure id="VALUE" order="5" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="VALUE"/>
+      <measureMapping columnObjectName="Union_1" columnName="VALUE"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="99" y="359"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="-93" y="359"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Union_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="-13" y="207"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

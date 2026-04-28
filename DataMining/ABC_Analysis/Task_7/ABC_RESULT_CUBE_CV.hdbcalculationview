@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="ABC_RESULT_CUBE_CV" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="ABC_RESULT_CUBE_CV"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="ABCRESULT">
+    <resourceUri>ABCRESULT</resourceUri>
+  </DataSource>
+  <DataSource id="GBI_DEMO_ABC_ANALYSIS_CUBE_CV">
+    <resourceUri>GBI_DEMO_ABC_ANALYSIS_CUBE_CV</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="ABC"/>
+      <viewAttribute id="Company_Name"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="ABCRESULT">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ABC" source="ABC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Company_Name" source="Company_Name"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_1" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="ABC"/>
+      <viewAttribute id="Company_Name"/>
+      <viewAttribute id="REVENUE_EUR" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ABC" source="ABC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Company_Name" source="Company_Name"/>
+    </input>
+    <input node="GBI_DEMO_ABC_ANALYSIS_CUBE_CV">
+      <mapping xsi:type="Calculation:AttributeMapping" target="REVENUE_EUR" source="REVENUE_EUR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Company_Name" source="CUSTOMER_NAME"/>
+    </input>
+    <joinAttribute name="Company_Name"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="ABC" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ABC"/>
+      <keyMapping columnObjectName="Join_1" columnName="ABC"/>
+    </attribute>
+    <attribute id="Company_Name" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Company_Name"/>
+      <keyMapping columnObjectName="Join_1" columnName="Company_Name"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="REVENUE_EUR" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="REVENUE_EUR"/>
+      <measureMapping columnObjectName="Join_1" columnName="REVENUE_EUR"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="352"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="234"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="168.53759765625"/>
+    </shape>
+    <shape modelObjectName="GBI_DEMO_ABC_ANALYSIS_CUBE_CV" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="290.9453125"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

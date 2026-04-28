@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="GBI_DEMO_PROD_DIM_CV" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="GBI_DEMO_PROD_DIM_CV"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="Product">
+    <resourceUri>Product</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="Product">
+  <attributes>
+    <attribute id="PRODUCT" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT"/>
+      <keyMapping columnObjectName="Product" columnName="PRODUCT"/>
+    </attribute>
+    <attribute id="PRODUCT_NAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_NAME"/>
+      <keyMapping columnObjectName="Product" columnName="PRODUCT_NAME"/>
+    </attribute>
+    <attribute id="PRODUCT_CATEGORY" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_CATEGORY"/>
+      <keyMapping columnObjectName="Product" columnName="PRODUCT_CATEGORY"/>
+    </attribute>
+    <attribute id="DIVISION" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DIVISION"/>
+      <keyMapping columnObjectName="Product" columnName="DIVISION"/>
+    </attribute>
+    <attribute id="INTERNAL_PRICE" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="INTERNAL_PRICE"/>
+      <keyMapping columnObjectName="Product" columnName="INTERNAL_PRICE"/>
+    </attribute>
+    <attribute id="PRICE" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRICE"/>
+      <keyMapping columnObjectName="Product" columnName="PRICE"/>
+    </attribute>
+    <attribute id="COLOR" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COLOR"/>
+      <keyMapping columnObjectName="Product" columnName="COLOR"/>
+    </attribute>
+    <attribute id="PRODUCT_GROUP" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_GROUP"/>
+      <keyMapping columnObjectName="Product" columnName="PRODUCT_GROUP"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

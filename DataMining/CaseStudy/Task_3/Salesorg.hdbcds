@@ -1,0 +1,7 @@
+entity Salesorg {
+	key SALES_ORGANIZATION 	: String(4) not null;
+	key LANGUAGE 			: String(1) not null;
+	SHORT_TEXT 			: String(20); }
+technical configuration {
+	column store;
+}; 

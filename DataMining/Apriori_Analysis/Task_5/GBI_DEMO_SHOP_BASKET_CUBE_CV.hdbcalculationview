@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="GBI_DEMO_SHOP_BASKET_CUBE_CV" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="GBI_DEMO_SHOP_BASKET_CUBE_CV"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="GBI_DEMO_SHOP_BASKET">
+    <resourceUri>GBI_DEMO_SHOP_BASKET</resourceUri>
+  </DataSource>
+  <DataSource id="GBI_DEMO_Product">
+    <resourceUri>GBI_DEMO_Product</resourceUri>
+  </DataSource>
+  <DataSource id="GBI_DEMO_Customer">
+    <resourceUri>GBI_DEMO_Customer</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="YEAR"/>
+      <viewAttribute id="UNIT_OF_MEASURE"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="RECEIPT_ID"/>
+      <viewAttribute id="CUSTOMER_NUMBER"/>
+      <viewAttribute id="PRODUCT"/>
+      <viewAttribute id="SALES_QUANTITY"/>
+      <viewAttribute id="PURCH_PRICE"/>
+      <viewAttribute id="SALES_PRICE"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="GBI_DEMO_SHOP_BASKET">
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="UNIT_OF_MEASURE" source="UNIT_OF_MEASURE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RECEIPT_ID" source="RECEIPT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOMER_NUMBER" source="CUSTOMER_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT" source="PRODUCT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALES_QUANTITY" source="SALES_QUANTITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PURCH_PRICE" source="PURCH_PRICE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALES_PRICE" source="SALES_PRICE"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="CN_1" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="GBI_DEMO_Customer" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="PRODUCT_NAME"/>
+      <viewAttribute id="PRODUCT_CATEGORY"/>
+      <viewAttribute id="DIVISION"/>
+      <viewAttribute id="INTERNAL_PRICE" aggregationType="sum"/>
+      <viewAttribute id="PRICE" aggregationType="sum"/>
+      <viewAttribute id="COLOR"/>
+      <viewAttribute id="PRODUCT_GROUP"/>
+      <viewAttribute id="YEAR"/>
+      <viewAttribute id="UNIT_OF_MEASURE"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="RECEIPT_ID"/>
+      <viewAttribute id="CUSTOMER_NUMBER"/>
+      <viewAttribute id="PRODUCT"/>
+      <viewAttribute id="SALES_QUANTITY" aggregationType="sum"/>
+      <viewAttribute id="PURCH_PRICE" aggregationType="sum"/>
+      <viewAttribute id="SALES_PRICE" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="UNIT_OF_MEASURE" source="UNIT_OF_MEASURE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RECEIPT_ID" source="RECEIPT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOMER_NUMBER" source="CUSTOMER_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT" source="PRODUCT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALES_QUANTITY" source="SALES_QUANTITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PURCH_PRICE" source="PURCH_PRICE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALES_PRICE" source="SALES_PRICE"/>
+    </input>
+    <input node="GBI_DEMO_Product">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_NAME" source="PRODUCT_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_CATEGORY" source="PRODUCT_CATEGORY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION" source="DIVISION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="INTERNAL_PRICE" source="INTERNAL_PRICE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRICE" source="PRICE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COLOR" source="COLOR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_GROUP" source="PRODUCT_GROUP"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT" source="PRODUCT"/>
+    </input>
+    <joinAttribute name="PRODUCT"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_2" cardinality="CN_1" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="GBI_DEMO_Customer" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="CUSTOMER_NAME"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="VALID_TO"/>
+      <viewAttribute id="VALID_FROM"/>
+      <viewAttribute id="SALES_ORGANIZATION"/>
+      <viewAttribute id="COUNTRY"/>
+      <viewAttribute id="PRODUCT_NAME"/>
+      <viewAttribute id="PRODUCT_CATEGORY"/>
+      <viewAttribute id="DIVISION"/>
+      <viewAttribute id="INTERNAL_PRICE" aggregationType="sum"/>
+      <viewAttribute id="PRICE" aggregationType="sum"/>
+      <viewAttribute id="COLOR"/>
+      <viewAttribute id="PRODUCT_GROUP"/>
+      <viewAttribute id="YEAR"/>
+      <viewAttribute id="UNIT_OF_MEASURE"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="RECEIPT_ID"/>
+      <viewAttribute id="CUSTOMER_NUMBER"/>
+      <viewAttribute id="PRODUCT"/>
+      <viewAttribute id="SALES_QUANTITY" aggregationType="sum"/>
+      <viewAttribute id="PURCH_PRICE" aggregationType="sum"/>
+      <viewAttribute id="SALES_PRICE" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Join_1_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_NAME" source="PRODUCT_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_CATEGORY" source="PRODUCT_CATEGORY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION" source="DIVISION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="INTERNAL_PRICE" source="INTERNAL_PRICE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRICE" source="PRICE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COLOR" source="COLOR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_GROUP" source="PRODUCT_GROUP"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="UNIT_OF_MEASURE" source="UNIT_OF_MEASURE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RECEIPT_ID" source="RECEIPT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOMER_NUMBER" source="CUSTOMER_NUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT" source="PRODUCT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALES_QUANTITY" source="SALES_QUANTITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PURCH_PRICE" source="PURCH_PRICE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALES_PRICE" source="SALES_PRICE"/>
+    </input>
+    <input node="GBI_DEMO_Customer">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOMER_NAME" source="CUSTOMER_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALID_TO" source="VALID_TO"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALID_FROM" source="VALID_FROM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SALES_ORGANIZATION" source="SALES_ORGANIZATION"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOMER_NUMBER" source="CUSTOMER_NUMBER"/>
+    </input>
+    <joinAttribute name="CUSTOMER_NUMBER"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1_2">
+  <attributes>
+    <attribute id="CUSTOMER_NAME" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUSTOMER_NAME"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="CUSTOMER_NAME"/>
+    </attribute>
+    <attribute id="CITY" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CITY"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="CITY"/>
+    </attribute>
+    <attribute id="VALID_TO" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="VALID_TO"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="VALID_TO"/>
+    </attribute>
+    <attribute id="VALID_FROM" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="VALID_FROM"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="VALID_FROM"/>
+    </attribute>
+    <attribute id="SALES_ORGANIZATION" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SALES_ORGANIZATION"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="SALES_ORGANIZATION"/>
+    </attribute>
+    <attribute id="COUNTRY" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COUNTRY"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="COUNTRY"/>
+    </attribute>
+    <attribute id="PRODUCT_NAME" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_NAME"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="PRODUCT_NAME"/>
+    </attribute>
+    <attribute id="PRODUCT_CATEGORY" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_CATEGORY"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="PRODUCT_CATEGORY"/>
+    </attribute>
+    <attribute id="DIVISION" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DIVISION"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DIVISION"/>
+    </attribute>
+    <attribute id="COLOR" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COLOR"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="COLOR"/>
+    </attribute>
+    <attribute id="PRODUCT_GROUP" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_GROUP"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="PRODUCT_GROUP"/>
+    </attribute>
+    <attribute id="YEAR" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="YEAR"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="YEAR"/>
+    </attribute>
+    <attribute id="UNIT_OF_MEASURE" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="UNIT_OF_MEASURE"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="UNIT_OF_MEASURE"/>
+    </attribute>
+    <attribute id="CURRENCY" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CURRENCY"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="CURRENCY"/>
+    </attribute>
+    <attribute id="RECEIPT_ID" order="17" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="RECEIPT_ID"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="RECEIPT_ID"/>
+    </attribute>
+    <attribute id="CUSTOMER_NUMBER" order="18" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUSTOMER_NUMBER"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="CUSTOMER_NUMBER"/>
+    </attribute>
+    <attribute id="PRODUCT" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="PRODUCT"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="INTERNAL_PRICE" order="10" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="INTERNAL_PRICE"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="INTERNAL_PRICE"/>
+    </measure>
+    <measure id="PRICE" order="11" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="PRICE"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="PRICE"/>
+    </measure>
+    <measure id="SALES_QUANTITY" order="20" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="SALES_QUANTITY"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="SALES_QUANTITY"/>
+    </measure>
+    <measure id="PURCH_PRICE" order="21" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="PURCH_PRICE"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="PURCH_PRICE"/>
+    </measure>
+    <measure id="SALES_PRICE" order="22" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="SALES_PRICE"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="SALES_PRICE"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="100" y="105"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="412"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="242"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="202.53125"/>
+    </shape>
+    <shape modelObjectName="GBI_DEMO_Customer" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="210.4912109375"/>
+    </shape>
+    <shape modelObjectName="GBI_DEMO_Product" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="620" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

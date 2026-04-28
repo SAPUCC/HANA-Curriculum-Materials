@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="APRIORI_ANALYSIS_DIM_CV" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="APRIORI_ANALYSIS_DIM_CV"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="GBI_DEMO_Product">
+    <resourceUri>GBI_DEMO_Product</resourceUri>
+  </DataSource>
+  <DataSource id="APRIORIRESULT">
+    <resourceUri>APRIORIRESULT</resourceUri>
+  </DataSource>
+  <DataSource id="Join_2$$$$GBI_DEMO_Product$$">
+    <resourceUri>GBI_DEMO_Product</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="referential" referentialDirection="left">
+    <viewAttributes>
+      <viewAttribute id="ANTECEDENT"/>
+      <viewAttribute id="CONSEQUENT"/>
+      <viewAttribute id="SUPPORT"/>
+      <viewAttribute id="CONFIDENCE"/>
+      <viewAttribute id="LIFT"/>
+      <viewAttribute id="ANT_NAME"/>
+      <viewAttribute hidden="true" id="JOIN$PRODUCT$ANTECEDENT"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="GBI_DEMO_Product">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ANT_NAME" source="PRODUCT_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$PRODUCT$ANTECEDENT" source="PRODUCT"/>
+    </input>
+    <input node="APRIORIRESULT">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ANTECEDENT" source="ANTECEDENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CONSEQUENT" source="CONSEQUENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SUPPORT" source="SUPPORT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CONFIDENCE" source="CONFIDENCE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LIFT" source="LIFT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$PRODUCT$ANTECEDENT" source="ANTECEDENT"/>
+    </input>
+    <joinAttribute name="JOIN$PRODUCT$ANTECEDENT"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="referential" referentialDirection="left">
+    <viewAttributes>
+      <viewAttribute id="ANTECEDENT"/>
+      <viewAttribute id="CONSEQUENT"/>
+      <viewAttribute id="SUPPORT"/>
+      <viewAttribute id="CONFIDENCE"/>
+      <viewAttribute id="LIFT"/>
+      <viewAttribute id="ANT_NAME"/>
+      <viewAttribute id="CON_NAME"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Join_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ANTECEDENT" source="ANTECEDENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CONSEQUENT" source="CONSEQUENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SUPPORT" source="SUPPORT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CONFIDENCE" source="CONFIDENCE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LIFT" source="LIFT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ANT_NAME" source="ANT_NAME"/>
+    </input>
+    <input node="Join_2$$$$GBI_DEMO_Product$$">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CON_NAME" source="PRODUCT_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CONSEQUENT" source="PRODUCT"/>
+    </input>
+    <joinAttribute name="CONSEQUENT"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_2">
+  <attributes>
+    <attribute id="ANT_NAME" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_NAME"/>
+      <keyMapping columnObjectName="Join_2" columnName="ANT_NAME"/>
+    </attribute>
+    <attribute id="ANTECEDENT" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ANTECEDENT"/>
+      <keyMapping columnObjectName="Join_2" columnName="ANTECEDENT"/>
+    </attribute>
+    <attribute id="CON_NAME" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_NAME"/>
+      <keyMapping columnObjectName="Join_2" columnName="CON_NAME"/>
+    </attribute>
+    <attribute id="CONSEQUENT" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CONSEQUENT"/>
+      <keyMapping columnObjectName="Join_2" columnName="CONSEQUENT"/>
+    </attribute>
+    <attribute id="SUPPORT" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SUPPORT"/>
+      <keyMapping columnObjectName="Join_2" columnName="SUPPORT"/>
+    </attribute>
+    <attribute id="LIFT" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LIFT"/>
+      <keyMapping columnObjectName="Join_2" columnName="LIFT"/>
+    </attribute>
+    <attribute id="CONFIDENCE" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CONFIDENCE"/>
+      <keyMapping columnObjectName="Join_2" columnName="CONFIDENCE"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="313"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="GBI_DEMO_Product" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="207.22021484375"/>
+    </shape>
+    <shape modelObjectName="APRIORIRESULT" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="163.61767578125"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="186"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="178.2861328125"/>
+    </shape>
+    <shape modelObjectName="GBI_DEMO_Product" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="207.22021484375"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
